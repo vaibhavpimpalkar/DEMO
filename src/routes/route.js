@@ -1,12 +1,18 @@
 const express  = require("express")
 const router =express.Router()
-const userController = require('../controller/userController')
+const { createUser,login, getProfile ,updateUserDetails } = require('../controller/userController')
 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>API's for User>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+//_______________________________________________USER API'S______________________________________________________//
 
-router.post('/register',userController.createUser);
-router.get("/user/:userId/profile",userController.getUserProfile)
-router.post("/login", userController.login)
+
+
+router.post('/register',createUser);
+router.get("/user/:userId/profile",getProfile)
+router.post("/login",login)
+router.put('/user/:userId/profile',updateUserDetails)
+
+
+
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>AWS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
@@ -33,7 +39,7 @@ router.post("/write-file-aws", async function(req, res){
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>API for  pathParam >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-router.all("/*",(req,res)=>{res.status(400).send({status:false,message:"Invalid path params"})})
+// router.all("/*",(req,res)=>{res.status(400).send({status:false,message:"Invalid path params"})})
 
 
 
